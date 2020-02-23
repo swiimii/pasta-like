@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour
@@ -9,6 +10,7 @@ public class GameState : MonoBehaviour
     [SerializeField] GameObject playerInteractionUI;
     [SerializeField] List<string> players;
     [SerializeField] GameObject deathScreen;
+    public string gameKey = "";
 
     private void Start()
     {
@@ -43,12 +45,15 @@ public class GameState : MonoBehaviour
 
     public void ReturnToMenu()
     {
+        deathScreen.SetActive(false);
         players.Clear();
+        StartCoroutine("DeleteNetworkRoom");
         SceneManager.LoadScene(1);
     }
 
     public void PlayAgain()
     {
+        deathScreen.SetActive(false);
         SceneManager.LoadScene(2);
     }
     public void ShowDeathScreen()
@@ -70,5 +75,25 @@ public class GameState : MonoBehaviour
     public void TogglePauseMenu(bool input)
     {
         deathScreen.SetActive(input);
+    }
+
+    public IEnumerator DeleteNetworkRoom()
+    {
+        List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
+
+        UnityWebRequest www = UnityWebRequest.Delete("http://flask-dot-pasta-like.appspot.com/rooms/" + gameKey);
+        print(gameKey);
+
+        yield return www.SendWebRequest();
+
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log("Room Key Delete Failed!");
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log("Room Key Deleted!");
+        }
     }
 }

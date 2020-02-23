@@ -7,13 +7,14 @@ public class Door : MonoBehaviour
     public int direction;
     public string type;
     public GameObject container;
+    public bool locked = false;
 
     [SerializeField] GameObject roomPrefab, hallwayPrefab;
     private float placementOffset = 1.76f;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
+        if(!locked && collision.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
         {
             Vector3 newPosition = container.transform.position + Vector3.right * placementOffset;
 
@@ -28,7 +29,7 @@ public class Door : MonoBehaviour
                 var state = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameState>();
                 var menu = state.ShowPlayerInteractionUI();
                 menu.SetActive(true);
-                menu.GetComponent<PlayerInteractionMenu>();
+                menu.GetComponent<PlayerInteractionMenu>().room = hallway.GetComponent<LockedRoom>();
             }
 
             if(type == "Hallway")
@@ -45,4 +46,5 @@ public class Door : MonoBehaviour
 
         }
     }
+
 }

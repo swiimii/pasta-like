@@ -320,6 +320,8 @@ GameObject:
   - component: {fileID: 8182913675757161024}
   - component: {fileID: 2852575352941084547}
   - component: {fileID: 7627449015842219294}
+  - component: {fileID: 3784589788884315205}
+  - component: {fileID: 3721663448546653351}
   m_Layer: 10
   m_Name: Dungeon Room
   m_TagString: Untagged
@@ -579,6 +581,33 @@ MonoBehaviour:
   - {fileID: 8494225260212223958}
   - {fileID: 332769120393300888}
   - {fileID: 3534166453334165559}
+--- !u!114 &3784589788884315205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8789020198990074582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a5d406db03cfa42b14686c382b93f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFirstRoom: 0
+  enemyPrefabs:
+  - {fileID: 6720116708498097175, guid: 280a7187141aa0f43b76ee3d11866803, type: 3}
+--- !u!114 &3721663448546653351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8789020198990074582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 065adb4401031624e81173e58392dcd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8789020199111840605
 GameObject:
   m_ObjectHideFlags: 0

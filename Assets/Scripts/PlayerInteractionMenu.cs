@@ -12,6 +12,8 @@ public class PlayerInteractionMenu : MonoBehaviour
     public int countdownMaximum = 20;
     public int postCountdownTime = 2;
 
+    public LockedRoom room;
+
     private void OnEnable()
     {
         StartCoroutine("PlayerInteraction");
@@ -37,6 +39,7 @@ public class PlayerInteractionMenu : MonoBehaviour
             timer -= 1;
             countdownTimer.text = timer.ToString();
         }
+        room.Unlock();
         gameObject.SetActive(false);
 
 
