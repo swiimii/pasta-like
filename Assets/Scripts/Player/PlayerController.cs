@@ -39,6 +39,11 @@ public class PlayerController : MonoBehaviour
             TogglePauseMenu();
             paused = paused ? false : true;
         }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GetComponent<PlayerBehavior>().Attack(Input.mousePosition);
+        }
     }
 
     public void TogglePauseMenu()

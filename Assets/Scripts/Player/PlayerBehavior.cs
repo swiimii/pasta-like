@@ -9,6 +9,7 @@ public class PlayerBehavior : MonoBehaviour
     public bool invulnerable;
     public List<Image> playerHealth;
     public Sprite healthyPasta, damagedPasta, unhealthyPasta;
+    public GameObject attack;
 
     private void Start()
     {
@@ -38,6 +39,14 @@ public class PlayerBehavior : MonoBehaviour
                 StartCoroutine("Invulnerable");
             }
         }
+    }
+
+    public void Attack(Vector3 mousePosition)
+    {
+        var atk = Instantiate(attack);
+        atk.transform.position = transform.position; 
+        atk.GetComponent<Rigidbody2D>().velocity = (Input.mousePosition - transform.position - new Vector3(Camera.main.scaledPixelWidth / 2, Camera.main.scaledPixelHeight / 2)).normalized;
+
     }
     
     public IEnumerator Invulnerable()

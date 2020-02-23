@@ -23,7 +23,7 @@ public class Door : MonoBehaviour
                 // create hallway
                 container.GetComponent<RoomData>().doorHitboxes[direction].SetActive(false);
                 var hallway = Instantiate(hallwayPrefab);
-                hallway.transform.position = new Vector3(newPosition.x, newPosition.y, hallway.transform.position.z);
+                hallway.transform.localPosition = new Vector3(newPosition.x, newPosition.y, hallway.transform.localPosition.z);
 
                 // show menu
                 var state = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameState>();
@@ -37,7 +37,7 @@ public class Door : MonoBehaviour
                 // create room
                 var room = Instantiate(roomPrefab);
                 room.GetComponent<RoomData>().doorHitboxes[(direction + 2)%4].SetActive(false);
-                room.transform.position = new Vector3(newPosition.x, newPosition.y, room.transform.position.z);
+                room.transform.localPosition = new Vector3(newPosition.x, newPosition.y, room.transform.localPosition.z);
 
             }
             

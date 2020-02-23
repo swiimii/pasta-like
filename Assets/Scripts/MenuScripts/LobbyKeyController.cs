@@ -23,12 +23,12 @@ public class LobbyKeyController : MonoBehaviour
 
         if (www.isNetworkError || www.isHttpError)
         {
-            Debug.Log("Room Delete Failed!");
+            Debug.Log("Room Key Get Failed!");
             Debug.Log(www.error);
         }
         else
         {
-            Debug.Log("Room Deleted!");
+            Debug.Log("Room Key Acquired!");
             print(www.downloadHandler.text);
             gameKey.text = www.downloadHandler.text.Substring(1, 4);
             GameObject.FindGameObjectWithTag("GameController").GetComponent<GameState>().gameKey = www.downloadHandler.text.Substring(1, 4);

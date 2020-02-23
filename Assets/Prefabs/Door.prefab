@@ -158,6 +158,7 @@ MonoBehaviour:
   direction: 0
   type: 
   container: {fileID: 0}
+  locked: 0
   roomPrefab: {fileID: 8789020198990074582, guid: 516051b934c3e0e4f9d9844619db2302,
     type: 3}
   hallwayPrefab: {fileID: 7351438515334417075, guid: 74d79d6ccf031c54f836e96bd4d7b022,

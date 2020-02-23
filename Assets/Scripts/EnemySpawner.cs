@@ -6,10 +6,11 @@ public class EnemySpawner : MonoBehaviour
 {
     
     // Start is called before the first frame update
-    public void SpawnEnemy(GameObject enemy, Vector3 position, Transform parent)
+    public GameObject SpawnEnemy(GameObject enemy, Vector3 position, Vector3 roomPosition)
     {
-        var output = Instantiate(enemy, parent);
-        output.transform.localPosition= new Vector3(position.x, position.y, output.transform.position.z);
+        var output = Instantiate(enemy);
+        output.transform.position = new Vector3(position.x + roomPosition.x, position.y + roomPosition.y, output.transform.position.z);
+        return output;
         
     }
 }

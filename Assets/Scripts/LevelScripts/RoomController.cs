@@ -6,13 +6,16 @@ public class RoomController : MonoBehaviour
 {
     public bool isFirstRoom = false;
     public List<GameObject> enemyPrefabs;
+    public int numEnemies = 5;
+    public int enemiesLeft;
     private void Start()
     {
         if(!isFirstRoom)
         {
             print("Hello");
             // create enemies
-            SpawnEnemies(1);
+            SpawnEnemies(numEnemies);
+            enemiesLeft = numEnemies;
         }        
     }
 
@@ -21,7 +24,17 @@ public class RoomController : MonoBehaviour
         for(int i = 0; i < numEnemies; i++)
         {
             var position = new Vector3(Random.value * 2 - 1, Random.value * 2 - 1);
-            GetComponent<EnemySpawner>().SpawnEnemy(enemyPrefabs[i % enemyPrefabs.Count], position, transform);
+            var enemy = GetComponent<EnemySpawner>().SpawnEnemy(enemyPrefabs[i % enemyPrefabs.Count], position, transform.position);
+            enemy.GetComponent<EnemyBehavior>().container = this;
+        }
+    }
+
+    public void EnemyDeath()
+    {
+        enemiesLeft -= 1;
+        if(enemiesLeft == 0)
+        {
+            GetComponent<LockedRoom>().Unlock();
         }
     }
 }

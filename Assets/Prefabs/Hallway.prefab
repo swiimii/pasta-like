@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5593214259870422273}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: rightDoorHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.16, y: 0}
+  m_Offset: {x: 0.1, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -66,7 +66,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7351438514174262360}
   - component: {fileID: 7351438514174262363}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: roguelikeDungeon_hallway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7351438514465648849}
   - component: {fileID: 7351438514465648848}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: roguelikeDungeon_transparent_15 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 7351438515334417073}
   - component: {fileID: 7351438515334417078}
   - component: {fileID: 4447392281277218136}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hallway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +269,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08, y: 0.48}
+  m_Offset: {x: 0, y: 0.48}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -280,7 +280,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.76, y: 0.32}
+  m_Size: {x: 1.6, y: 0.32}
   m_EdgeRadius: 0
 --- !u!61 &7351438515334417078
 BoxCollider2D:
@@ -295,7 +295,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08, y: -0.48}
+  m_Offset: {x: 0, y: -0.48}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -306,7 +306,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.76, y: 0.32}
+  m_Size: {x: 1.6, y: 0.32}
   m_EdgeRadius: 0
 --- !u!114 &4447392281277218136
 MonoBehaviour:
@@ -331,7 +331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7351438515951127922}
   - component: {fileID: 7351438515951127933}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: roguelikeDungeon_transparent_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -417,7 +417,7 @@ PrefabInstance:
     - target: {fileID: 6720116708498097174, guid: 280a7187141aa0f43b76ee3d11866803,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.96
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 6720116708498097174, guid: 280a7187141aa0f43b76ee3d11866803,
         type: 3}
