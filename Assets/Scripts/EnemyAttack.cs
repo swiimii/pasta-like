@@ -2,27 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRangedAttack : MonoBehaviour
+public class EnemyAttack : MonoBehaviour
 {
-    public float damage = .5f;
-
     private void Start()
     {
         StartCoroutine("Death");
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.GetComponent<EnemyBehavior>())
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            collision.gameObject.GetComponent<EnemyBehavior>().Damage(damage);            
+            collision.gameObject.GetComponent<PlayerBehavior>().Damage(1);
         }
         Destroy(gameObject);
     }
-
     private IEnumerator Death()
     {
         yield return new WaitForSeconds(5);
         Destroy(gameObject);
     }
-
 }

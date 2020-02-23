@@ -597,6 +597,7 @@ MonoBehaviour:
   isFirstRoom: 0
   enemyPrefabs:
   - {fileID: 3205507054002990625, guid: 5beb3843d395b444ca3aabb8a5a91c87, type: 3}
+  - {fileID: 6085213849436110513, guid: 810c7ce19122bbe4f8565af2b7927c7d, type: 3}
   numEnemies: 5
   enemiesLeft: 0
 --- !u!114 &3721663448546653351

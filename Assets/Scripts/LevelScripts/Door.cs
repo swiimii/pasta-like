@@ -36,12 +36,13 @@ public class Door : MonoBehaviour
             {
                 // create room
                 var room = Instantiate(roomPrefab);
-                room.GetComponent<RoomData>().doorHitboxes[(direction + 2)%4].SetActive(false);
+                //room.GetComponent<RoomData>().doorHitboxes[(direction + 2)%4].SetActive(false);
                 room.transform.localPosition = new Vector3(newPosition.x, newPosition.y, room.transform.localPosition.z);
 
+
             }
-            
-            gameObject.SetActive(false);
+            Destroy(container);
+            //gameObject.SetActive(false);
 
 
         }

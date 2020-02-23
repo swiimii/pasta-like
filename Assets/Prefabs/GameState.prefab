@@ -150,6 +150,7 @@ MonoBehaviour:
   playerInteractionUI: {fileID: 8867206541085821964}
   players: []
   deathScreen: {fileID: 0}
+  gameKey: 
 --- !u!1 &1135878120195941579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,7 +1049,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: b38ac7ddbd882dc4e8cdecb28d7eea11, type: 3}
     m_FontSize: 33
     m_FontStyle: 3
     m_BestFit: 0
@@ -1563,7 +1564,7 @@ MonoBehaviour:
   option1: {fileID: 8967436909610793177}
   option2: {fileID: 7059076506051649755}
   countdownTimer: {fileID: 4262399744018738095}
-  countdownMaximum: 20
+  countdownMaximum: 12
   postCountdownTime: 2
   room: {fileID: 0}
 --- !u!1 &8967436909610793177

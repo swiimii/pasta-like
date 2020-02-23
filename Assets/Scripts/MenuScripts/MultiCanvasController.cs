@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MultiCanvasController : MonoBehaviour
 {
@@ -19,5 +20,10 @@ public class MultiCanvasController : MonoBehaviour
                 menus[i].SetActive(false);
             }
         }
+    }
+
+    public void LoadScene(int scene)
+    {
+        SceneManager.LoadScene(2);
     }
 }
