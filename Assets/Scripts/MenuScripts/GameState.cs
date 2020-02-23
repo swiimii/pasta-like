@@ -105,4 +105,21 @@ public class GameState : MonoBehaviour
             Debug.Log("Room Key Deleted!");
         }
     }
+
+    public IEnumerator DeleteNetworkQuestion()
+    {
+        UnityWebRequest www = UnityWebRequest.Delete("http://flask-dot-pasta-like.appspot.com/rooms/"+ gameKey + "/active");
+
+        yield return www.SendWebRequest();
+
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log("Question Delete Failed!");
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log("Question Deleted!");
+        }
+    }
 }

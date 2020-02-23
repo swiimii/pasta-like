@@ -29,6 +29,14 @@ public class PlayerController : MonoBehaviour
                 {
                     movementInput.Normalize();
                 }
+                if(movementInput.x > 0)
+                {
+                    GetComponent<SpriteRenderer>().flipX = true;
+                }
+                else if (movementInput.x < 0)
+                {
+                    GetComponent<SpriteRenderer>().flipX = false;
+                }
 
                 // Send to playerbehavior
                 GetComponent<PlayerBehavior>().Move(movementInput * inverse);

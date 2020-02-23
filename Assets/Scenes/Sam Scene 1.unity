@@ -878,6 +878,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4107012933397227485, guid: 9ee495fefeb1e4d47a63302f8899fa92,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 90affaace85a2384e82e74d6b64fe374, type: 2}
+    - target: {fileID: -4107012933397227485, guid: 9ee495fefeb1e4d47a63302f8899fa92,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3085218697400099417, guid: 9ee495fefeb1e4d47a63302f8899fa92,
         type: 3}
       propertyPath: m_Name
@@ -938,6 +948,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3085218697400099416, guid: 9ee495fefeb1e4d47a63302f8899fa92,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1959318053
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085218697400099416, guid: 9ee495fefeb1e4d47a63302f8899fa92,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085218697400099416, guid: 9ee495fefeb1e4d47a63302f8899fa92,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 8572729415810180373, guid: b8ba7a46bc0a1dd45b51ac9e62dd0f55,
+        type: 3}
     - target: {fileID: 3085218697400099396, guid: 9ee495fefeb1e4d47a63302f8899fa92,
         type: 3}
       propertyPath: m_Constraints

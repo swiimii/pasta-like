@@ -34,11 +34,4 @@ public class LobbyKeyController : MonoBehaviour
             GameObject.FindGameObjectWithTag("GameController").GetComponent<GameState>().gameKey = www.downloadHandler.text.Substring(1, 4);
         }
     }
-
-    private void OnDisable()
-    {
-        gameKey.text = "...";
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameState>().StartCoroutine("DeleteNetworkRoom");
-
-    }
 }

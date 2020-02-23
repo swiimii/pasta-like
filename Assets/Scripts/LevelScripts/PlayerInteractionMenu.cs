@@ -8,9 +8,19 @@ public class PlayerInteractionMenu : MonoBehaviour
     public GameObject option1;
     public GameObject option2;
     public Text countdownTimer;
+    public Text rightCountUI;
+    public Text leftCountUI;
 
     public int countdownMaximum = 20;
     public int postCountdownTime = 2;
+
+    public string left = "1";
+    public string right = "2";
+
+    public int leftCount = 0;
+    public int rightCount = 0;
+
+    private string questionId;
 
     public LockedRoom room;
 
@@ -18,12 +28,11 @@ public class PlayerInteractionMenu : MonoBehaviour
     {
         StartCoroutine("PlayerInteraction");
         StartCoroutine("PostQuestions");
+        // StartCoroutine("GetResponses");
     }
 
     public IEnumerator PlayerInteraction()
     {
-        int votes1 = 0;
-        int votes2 = 1;
 
         int timer = countdownMaximum;
         countdownTimer.text = timer.ToString();
@@ -32,14 +41,16 @@ public class PlayerInteractionMenu : MonoBehaviour
             yield return new WaitForSeconds(1);
             timer -= 1;
             countdownTimer.text = timer.ToString();
+            rightCountUI.text = rightCount.ToString();
+            leftCountUI.text = leftCount.ToString();
         }
 
-        if (votes1 > votes2)
+        if (leftCount > rightCount)
         {
             option1.GetComponent<ScalingOptionScript>().ResolveOption();
             option2.GetComponentInChildren<Image>().color = new Color(1, 1, 1, .5f);
         }
-        else if (votes2 > votes1)
+        else if (rightCount > leftCount)
         {
             option2.GetComponent<ScalingOptionScript>().ResolveOption();
             option1.GetComponentInChildren<Image>().color = new Color(1, 1, 1, .5f);
@@ -62,15 +73,14 @@ public class PlayerInteractionMenu : MonoBehaviour
         option2.GetComponentInChildren<Image>().color = Color.white;
         option1.GetComponentInChildren<Image>().color = Color.white;
 
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameState>().StartCoroutine("DeleteNetworkQuestion");
+
         room.Unlock();
         gameObject.SetActive(false);
     }
 
     public IEnumerator PostQuestions()
-    {
-        var desc1 = option1.GetComponent<ScalingOptionScript>().option.description;
-        var desc2 = option2.GetComponent<ScalingOptionScript>().option.description;
-
+    {        
         var gameKey = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameState>().gameKey;
 
         if (gameKey.Equals(""))
@@ -79,8 +89,9 @@ public class PlayerInteractionMenu : MonoBehaviour
         }
         else
         {
-            var input = new OptionPost(desc1, desc2);
-            UnityWebRequest www = UnityWebRequest.Post("http://flask-dot-pasta-like.appspot.com/questions/" + gameKey, JsonUtility.ToJson(input));
+            var input = new OptionPost(left, right);
+            UnityWebRequest www = UnityWebRequest.Post("https://flask-dot-pasta-like.appspot.com/questions/" + gameKey, JsonUtility.ToJson(input));
+            www.SetRequestHeader("Content-Type", "application/json");
 
             yield return www.SendWebRequest();
 
@@ -92,10 +103,93 @@ public class PlayerInteractionMenu : MonoBehaviour
             else
             {
                 Debug.Log("Question Post Success!");
-                print(www.downloadHandler.text);                
+                questionId = www.downloadHandler.text;
+                print(questionId);
+                
             }
         }
-        
+
+        string url = "https://flask-dot-pasta-like.appspot.com/responses/" + questionId.Substring(1,questionId.Length-3);
+        while (true)
+        {
+            print(url);
+            UnityWebRequest www = UnityWebRequest.Get(url);
+
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log("Response Get Failed!");
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log("Response Get Success!");
+                if (!www.downloadHandler.text.Trim().Equals("{}"))
+                {
+                    var output = JsonUtility.FromJson<ResponseGet>(www.downloadHandler.text);
+                    foreach (string value in output.answerMap.Values)
+                    {
+                        if (value.Equals(left))
+                        {
+                            leftCount++;
+                        }
+                        if (value.Equals(right))
+                        {
+                            rightCount++;
+                        }
+                    }
+                }
+            }           
+            yield return new WaitForSeconds(.3f);
+        }
+
+    }
+
+    public IEnumerator GetResponses()
+    {
+        string url = "https://flask-dot-pasta-like.appspot.com/responses/" + questionId;
+        while (true)
+        {        
+            var gameKey = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameState>().gameKey;
+
+            if (gameKey.Equals(""))
+            {
+                yield return null;
+            }
+            else
+            {
+                print(url);
+                UnityWebRequest www = UnityWebRequest.Get(url);
+
+                yield return www.SendWebRequest();
+
+                if (www.isNetworkError || www.isHttpError)
+                {
+                    Debug.Log("Response Get Failed!");
+                    Debug.Log(www.error);
+                }
+                else
+                {
+                    Debug.Log("Response Get Success!");
+                    print(www.downloadHandler.text);
+                    var output = JsonUtility.FromJson<ResponseGet>(www.downloadHandler.text);
+                    foreach(string value in output.answerMap.Values)
+                    {
+                        if(value.Equals(left))
+                        {
+                            leftCount++;
+                        }
+                        if(value.Equals(right))
+                        {
+                            rightCount++;
+                        }
+                    }
+                }
+            }
+
+            yield return new WaitForSeconds(.3f);
+        }
     }
 
     class OptionPost
@@ -103,9 +197,18 @@ public class PlayerInteractionMenu : MonoBehaviour
         public List<string> opt;
         public OptionPost(string s1, string s2)
         {
+            opt = new List<string>();
             opt.Add(s1);
             opt.Add(s2);
         }
+    }
+    class ResponseGet
+    {
+        public Dictionary<string, string> answerMap;
+    }
+    private void OnDisable()
+    {
+        
     }
 
 }
