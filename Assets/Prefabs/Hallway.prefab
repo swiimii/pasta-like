@@ -1,5 +1,61 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2449738936790094206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5593214259870422273}
+  m_Layer: 10
+  m_Name: rightDoorHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5593214259870422273
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2449738936790094206}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7351438515334417072}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &8247916327752177193
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6462416948202265525}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.1, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.32, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &7351438514174262362
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +66,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7351438514174262360}
   - component: {fileID: 7351438514174262363}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: roguelikeDungeon_hallway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +85,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7351438515334417072}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7351438514174262363
 SpriteRenderer:
@@ -91,7 +147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7351438514465648849}
   - component: {fileID: 7351438514465648848}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: roguelikeDungeon_transparent_15 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +166,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7351438515334417072}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7351438514465648848
 SpriteRenderer:
@@ -173,7 +229,10 @@ GameObject:
   - component: {fileID: 7351438515334417072}
   - component: {fileID: 7351438515334417073}
   - component: {fileID: 7351438515334417078}
-  m_Layer: 0
+  - component: {fileID: 4447392281277218136}
+  - component: {fileID: 7199904299547439716}
+  - component: {fileID: 880784884987502277}
+  m_Layer: 10
   m_Name: Hallway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,6 +250,7 @@ Transform:
   m_LocalPosition: {x: 1.76, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 5593214259870422273}
   - {fileID: 7351438514174262360}
   - {fileID: 7351438515951127922}
   - {fileID: 7351438514465648849}
@@ -222,7 +282,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6, y: 0.32}
+  m_Size: {x: 2.8, y: 0.32}
   m_EdgeRadius: 0
 --- !u!61 &7351438515334417078
 BoxCollider2D:
@@ -248,8 +308,144 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6, y: 0.32}
+  m_Size: {x: 2.87, y: 0.32}
   m_EdgeRadius: 0
+--- !u!114 &4447392281277218136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7351438515334417075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ec925495ea5734586cc6de6de7bd09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorToUnlock: {fileID: 7368341894913719342}
+--- !u!61 &7199904299547439716
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7351438515334417075}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.12, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.32, y: 1}
+  m_EdgeRadius: 0
+--- !u!82 &880784884987502277
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7351438515334417075}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 109619846500673607, guid: 8436a2832f65a2c42a0070a3282b6d5a,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: e5329c7a2bda4b6469aa5e04c53c57b4, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7351438515951127932
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +456,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7351438515951127922}
   - component: {fileID: 7351438515951127933}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: roguelikeDungeon_transparent_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +475,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7351438515334417072}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7351438515951127933
 SpriteRenderer:
@@ -346,7 +542,7 @@ PrefabInstance:
     - target: {fileID: 6720116708498097174, guid: 280a7187141aa0f43b76ee3d11866803,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.96
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 6720116708498097174, guid: 280a7187141aa0f43b76ee3d11866803,
         type: 3}
@@ -381,7 +577,7 @@ PrefabInstance:
     - target: {fileID: 6720116708498097174, guid: 280a7187141aa0f43b76ee3d11866803,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6720116708498097174, guid: 280a7187141aa0f43b76ee3d11866803,
         type: 3}
@@ -419,11 +615,34 @@ PrefabInstance:
       propertyPath: type
       value: Hallway
       objectReference: {fileID: 0}
+    - target: {fileID: 7110093754199499660, guid: 280a7187141aa0f43b76ee3d11866803,
+        type: 3}
+      propertyPath: locked
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 280a7187141aa0f43b76ee3d11866803, type: 3}
+--- !u!1 &6462416948202265525 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6720116708498097175, guid: 280a7187141aa0f43b76ee3d11866803,
+    type: 3}
+  m_PrefabInstance: {fileID: 355146049154523042}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6462416948202265524 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6720116708498097174, guid: 280a7187141aa0f43b76ee3d11866803,
     type: 3}
   m_PrefabInstance: {fileID: 355146049154523042}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7368341894913719342 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7110093754199499660, guid: 280a7187141aa0f43b76ee3d11866803,
+    type: 3}
+  m_PrefabInstance: {fileID: 355146049154523042}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6462416948202265525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c27ff4f8b27aa242b5f30c1f6892c4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

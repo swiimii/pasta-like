@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 3;
     public int currentHealth;
     public bool paused = false;
+    public int inverse = 1;
 
     private void Start()
     {
@@ -28,9 +29,17 @@ public class PlayerController : MonoBehaviour
                 {
                     movementInput.Normalize();
                 }
+                if(movementInput.x > 0)
+                {
+                    GetComponent<SpriteRenderer>().flipX = true;
+                }
+                else if (movementInput.x < 0)
+                {
+                    GetComponent<SpriteRenderer>().flipX = false;
+                }
 
                 // Send to playerbehavior
-                GetComponent<PlayerBehavior>().Move(movementInput);
+                GetComponent<PlayerBehavior>().Move(movementInput * inverse);
             }
         }
 
@@ -38,6 +47,11 @@ public class PlayerController : MonoBehaviour
         {
             TogglePauseMenu();
             paused = paused ? false : true;
+        }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GetComponent<PlayerBehavior>().Attack(Input.mousePosition);
         }
     }
 

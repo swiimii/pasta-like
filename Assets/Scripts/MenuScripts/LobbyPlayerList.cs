@@ -8,10 +8,16 @@ public class LobbyPlayerList : MonoBehaviour
 {
     [SerializeField] Text playerList;
     int maxPlayers = 4;
+    [SerializeField] float interval = 5, currentTime;
 
-    private void OnEnable()
+    private void Update()
     {
-        StartCoroutine("MockPlayersJoining");
+        currentTime -= Time.deltaTime;
+        if(currentTime < 0)
+        {
+            currentTime = interval;
+            StartCoroutine("CheckServerPlayerList");
+        }
     }
 
     public void AddPlayerToList(string playerName)
@@ -37,13 +43,49 @@ public class LobbyPlayerList : MonoBehaviour
 
     }
 
-    public IEnumerator MockPlayersJoining()
+    public IEnumerator CheckServerPlayerList()
     {
-        while(true)
+        var gameKey = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameState>().gameKey;
+
+        if (gameKey.Equals(""))
         {
-            AddPlayerToList(name);
-            yield return new WaitForSeconds(4);
+            yield return null;
         }
+        else
+        {
+            UnityWebRequest www = UnityWebRequest.Get("http://flask-dot-pasta-like.appspot.com/rooms/" + gameKey);
+
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log("Player Get Failed!");
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log("Player Get Success!");
+                print(www.downloadHandler.text);
+                PlayerList requestOut = new PlayerList();
+                requestOut = JsonUtility.FromJson<PlayerList>(www.downloadHandler.text);
+                playerList.text = "";
+                foreach(string str in requestOut.players)
+                {
+                    playerList.text += str + "\n";
+                }
+                print(www.downloadHandler.text);
+            }
+        }
+    }
+
+    public class PlayerList
+    {
+        public int max_players;
+        public string[] players;
+        public string room_id;
+        public string room_status;
+        public string room_type;
+        public float time_start;
     }
 
 }
