@@ -34,7 +34,6 @@ public class Door : MonoBehaviour
             if(type == "Hallway")
             {
                 // create room
-                // container.GetComponent<RoomData>().doorHitboxes[direction].SetActive(false);
                 var room = Instantiate(roomPrefab);
                 room.GetComponent<RoomData>().doorHitboxes[(direction + 2)%4].SetActive(false);
                 room.transform.position = new Vector3(newPosition.x, newPosition.y, room.transform.position.z);
