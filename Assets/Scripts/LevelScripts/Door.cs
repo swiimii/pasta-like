@@ -23,7 +23,12 @@ public class Door : MonoBehaviour
                 container.GetComponent<RoomData>().doorHitboxes[direction].SetActive(false);
                 var hallway = Instantiate(hallwayPrefab);
                 hallway.transform.position = new Vector3(newPosition.x, newPosition.y, hallway.transform.position.z);
-                
+
+                // show menu
+                var state = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameState>();
+                var menu = state.ShowPlayerInteractionUI();
+                menu.SetActive(true);
+                menu.GetComponent<PlayerInteractionMenu>();
             }
 
             if(type == "Hallway")

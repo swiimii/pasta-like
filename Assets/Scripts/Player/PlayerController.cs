@@ -6,32 +6,45 @@ public class PlayerController : MonoBehaviour
 {
 
     private float movementDeadzone = .1f;
+    public int maxHealth = 3;
+    public int currentHealth;
+    public bool paused = false;
 
+    private void Start()
+    {
+        currentHealth = maxHealth;
+    }
     // FixedUpdate called 60 times per second
     void FixedUpdate()
     {
-        var movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-        if ( Mathf.Abs(movementInput.x) > movementDeadzone || Mathf.Abs(movementInput.y) > movementDeadzone )
+        if (!paused)
         {
-            // Vector magnitude won't exceed 1
-            if (movementInput.magnitude > 1)
-            {
-                movementInput.Normalize();
-            }
+            var movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            // Send to playerbehavior
-            GetComponent<PlayerBehavior>().Move(movementInput);
+            if (Mathf.Abs(movementInput.x) > movementDeadzone || Mathf.Abs(movementInput.y) > movementDeadzone)
+            {
+                // Vector magnitude won't exceed 1
+                if (movementInput.magnitude > 1)
+                {
+                    movementInput.Normalize();
+                }
+
+                // Send to playerbehavior
+                GetComponent<PlayerBehavior>().Move(movementInput);
+            }
+        }
+
+        if (Input.GetButtonDown("Cancel"))
+        {
+            TogglePauseMenu();
+            paused = paused ? false : true;
         }
     }
 
-    // Called once every frame
-    void Update()
+    public void TogglePauseMenu()
     {
-        
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameState>().TogglePauseMenu();
     }
-
-
 
 }
 
