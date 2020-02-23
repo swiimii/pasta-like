@@ -18,7 +18,8 @@ public class PlayerRangedAttack : MonoBehaviour
     {
         if(collision.gameObject.GetComponent<EnemyBehavior>())
         {
-            collision.gameObject.GetComponent<EnemyBehavior>().Damage(damage);            
+            var gsAtk = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameState>().playerAttackMagnitude;
+            collision.gameObject.GetComponent<EnemyBehavior>().Damage(damage * ( 1f + gsAtk ) );
         }
         Destroy(gameObject);
     }

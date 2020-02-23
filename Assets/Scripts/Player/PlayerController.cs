@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 3;
     public int currentHealth;
     public bool paused = false;
+    public int inverse = 1;
 
     private void Start()
     {
@@ -30,7 +31,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 // Send to playerbehavior
-                GetComponent<PlayerBehavior>().Move(movementInput);
+                GetComponent<PlayerBehavior>().Move(movementInput * inverse);
             }
         }
 

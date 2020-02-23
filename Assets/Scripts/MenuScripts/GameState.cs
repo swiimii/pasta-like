@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameState : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class GameState : MonoBehaviour
     [SerializeField] List<string> players;
     [SerializeField] GameObject deathScreen;
     public string gameKey = "";
+    public float enemySpeedMagnitude = 0;
+    public float playerAttackMagnitude = 0;
+    public int levelNum = 0;
+    public Text deathScreenText;
 
     private void Start()
     {
@@ -48,17 +53,20 @@ public class GameState : MonoBehaviour
         deathScreen.SetActive(false);
         players.Clear();
         StartCoroutine("DeleteNetworkRoom");
+        levelNum = 0;
         SceneManager.LoadScene(1);
     }
 
     public void PlayAgain()
     {
         deathScreen.SetActive(false);
+        levelNum = 0;
         SceneManager.LoadScene(2);
     }
     public void ShowDeathScreen()
     {
         deathScreen.SetActive(true);
+        deathScreenText.text = "You made it 'till level " + levelNum + "!";
     }
     public void TogglePauseMenu()
     {
@@ -75,6 +83,7 @@ public class GameState : MonoBehaviour
     public void TogglePauseMenu(bool input)
     {
         deathScreen.SetActive(input);
+
     }
 
     public IEnumerator DeleteNetworkRoom()

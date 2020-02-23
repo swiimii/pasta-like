@@ -14,6 +14,8 @@ public class EnemyBehavior : MonoBehaviour
     {
         health = maxHealth;
         maxHealthBarScale = healthBar.transform.localScale.x;
+        var gsMg = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameState>().enemySpeedMagnitude;
+        moveSpeed *= (1 + gsMg);
     }
     public virtual void Move(Vector3 direction)
     {

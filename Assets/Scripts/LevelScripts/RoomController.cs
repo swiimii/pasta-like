@@ -14,16 +14,18 @@ public class RoomController : MonoBehaviour
         {
             print("Hello");
             // create enemies
-            SpawnEnemies(numEnemies);
-            enemiesLeft = numEnemies;
+            var gsLvl = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameState>().levelNum;
+            SpawnEnemies(numEnemies + gsLvl);
+            enemiesLeft = numEnemies + gsLvl;
         }        
     }
 
     public void SpawnEnemies(int numEnemies)
     {
-        for(int i = 0; i < numEnemies; i++)
+        
+        for (int i = 0; i < numEnemies; i++)
         {
-            var position = new Vector3(Random.value * 2 - 1, Random.value * 2 - 1);
+            var position = new Vector3(Random.value * 1.8f - .9f, Random.value * 1.8f - .9f);
             var enemy = GetComponent<EnemySpawner>().SpawnEnemy(enemyPrefabs[i % enemyPrefabs.Count], position, transform.position);
             enemy.GetComponent<EnemyBehavior>().container = this;
         }

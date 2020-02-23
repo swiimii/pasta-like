@@ -8,6 +8,7 @@ public class LockedRoom : MonoBehaviour
 
     public void Unlock()
     {
+        GetComponent<AudioSource>().Play();
         doorToUnlock.locked = false;
     }
 }

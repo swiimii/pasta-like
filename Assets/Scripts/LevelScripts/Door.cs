@@ -9,7 +9,7 @@ public class Door : MonoBehaviour
     public GameObject container;
     public bool locked = false;
 
-    [SerializeField] GameObject roomPrefab, hallwayPrefab;
+    [SerializeField] private GameObject roomPrefab, hallwayPrefab;
     private float placementOffset = 1.76f;
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -30,6 +30,7 @@ public class Door : MonoBehaviour
                 var menu = state.ShowPlayerInteractionUI();
                 menu.SetActive(true);
                 menu.GetComponent<PlayerInteractionMenu>().room = hallway.GetComponent<LockedRoom>();
+                GameObject.FindGameObjectWithTag("MusicSwitcher").GetComponent<MultiMusicController>().PlayVoteMusic();
             }
 
             if(type == "Hallway")
@@ -38,12 +39,12 @@ public class Door : MonoBehaviour
                 var room = Instantiate(roomPrefab);
                 //room.GetComponent<RoomData>().doorHitboxes[(direction + 2)%4].SetActive(false);
                 room.transform.localPosition = new Vector3(newPosition.x, newPosition.y, room.transform.localPosition.z);
-
+                GameObject.FindGameObjectWithTag("MusicSwitcher").GetComponent<MultiMusicController>().PlayCombatMusic();
+                var state = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameState>();
+                state.levelNum++;
 
             }
             Destroy(container);
-            //gameObject.SetActive(false);
-
 
         }
     }

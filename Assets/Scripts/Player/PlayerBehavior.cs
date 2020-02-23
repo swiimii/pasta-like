@@ -10,6 +10,7 @@ public class PlayerBehavior : MonoBehaviour
     public List<Image> playerHealth;
     public Sprite healthyPasta, damagedPasta, unhealthyPasta;
     public GameObject attack;
+    public AudioSource damageSound, deathSound;
 
     private void Start()
     {
@@ -24,6 +25,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         if(!invulnerable)
         {
+            damageSound.Play();
             var pc = GetComponent<PlayerController>();
             pc.currentHealth -= damage;
 
@@ -71,6 +73,7 @@ public class PlayerBehavior : MonoBehaviour
 
     public IEnumerator Death()
     {
+        deathSound.Play();
         GetComponent<PlayerController>().enabled = false;
         float delayTime = 1.5f;
         while (delayTime > 0)
