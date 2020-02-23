@@ -112,6 +112,7 @@ public class PlayerInteractionMenu : MonoBehaviour
         string url = "https://flask-dot-pasta-like.appspot.com/responses/" + questionId.Substring(1,questionId.Length-3);
         while (true)
         {
+            
             print(url);
             UnityWebRequest www = UnityWebRequest.Get(url);
 
@@ -127,9 +128,23 @@ public class PlayerInteractionMenu : MonoBehaviour
                 Debug.Log("Response Get Success!");
                 if (!www.downloadHandler.text.Trim().Equals("{}"))
                 {
-                    var output = JsonUtility.FromJson<ResponseGet>(www.downloadHandler.text);
-                    foreach (string value in output.answerMap.Values)
+                    print(www.downloadHandler.text);
+                    // var output = JsonUtility.FromJson<Dictionary<string, string>>(www.downloadHandler.text.Trim());
+                    var myString = www.downloadHandler.text;
+
+                    string[] arr = myString.Split(',');
+
+                    leftCount = 0;
+                    rightCount = 0;
+                    foreach (string str in arr)
                     {
+                        string[] vals = str.Split(':');
+                        if (vals.Length != 2)
+                        {
+                            continue;
+                        }
+                        string value = vals[1].Substring(1, 1);
+                        print(value);
                         if (value.Equals(left))
                         {
                             leftCount++;
@@ -139,6 +154,7 @@ public class PlayerInteractionMenu : MonoBehaviour
                             rightCount++;
                         }
                     }
+                    
                 }
             }           
             yield return new WaitForSeconds(.3f);
@@ -146,51 +162,74 @@ public class PlayerInteractionMenu : MonoBehaviour
 
     }
 
-    public IEnumerator GetResponses()
-    {
-        string url = "https://flask-dot-pasta-like.appspot.com/responses/" + questionId;
-        while (true)
-        {        
-            var gameKey = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameState>().gameKey;
+    //public IEnumerator GetResponses()
+    //{
+    //    string url = "https://flask-dot-pasta-like.appspot.com/responses/" + questionId;
+    //    while (true)
+    //    {        
+    //        var gameKey = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameState>().gameKey;
 
-            if (gameKey.Equals(""))
-            {
-                yield return null;
-            }
-            else
-            {
-                print(url);
-                UnityWebRequest www = UnityWebRequest.Get(url);
+    //        if (gameKey.Equals(""))
+    //        {
+    //            yield return null;
+    //        }
+    //        else
+    //        {
+    //            print(url);
+    //            UnityWebRequest www = UnityWebRequest.Get(url);
 
-                yield return www.SendWebRequest();
+    //            yield return www.SendWebRequest();
 
-                if (www.isNetworkError || www.isHttpError)
-                {
-                    Debug.Log("Response Get Failed!");
-                    Debug.Log(www.error);
-                }
-                else
-                {
-                    Debug.Log("Response Get Success!");
-                    print(www.downloadHandler.text);
-                    var output = JsonUtility.FromJson<ResponseGet>(www.downloadHandler.text);
-                    foreach(string value in output.answerMap.Values)
-                    {
-                        if(value.Equals(left))
-                        {
-                            leftCount++;
-                        }
-                        if(value.Equals(right))
-                        {
-                            rightCount++;
-                        }
-                    }
-                }
-            }
+    //            if (www.isNetworkError || www.isHttpError)
+    //            {
+    //                Debug.Log("Response Get Failed!");
+    //                Debug.Log(www.error);
+    //            }
+    //            else
+    //            {
+    //                Debug.Log("Response Get Success!");
+    //                print(www.downloadHandler.text);
+    //                var myString = www.downloadHandler.text;
+                    
+    //                string[] arr = myString.Split(',');
+    //                foreach (string str in arr)
+    //                {
+    //                    string[] vals = str.Split(':');
+    //                    if (vals.Length != 2)
+    //                    {
+    //                        continue;
+    //                    }
+    //                    string value = vals[1].Substring(1, 2);
+    //                    print(value);
+    //                    if (value.Equals(left))
+    //                    {
+    //                        leftCount++;
+    //                    }
+    //                    if (value.Equals(right))
+    //                    {
+    //                        rightCount++;
+    //                    }
+    //                }
+    //                //var output = JsonUtility.FromJson<ResponseGet>(www.downloadHandler.text);
+    //                var output = JsonUtility.FromJson<ResponseGet>(www.downloadHandler.text);
+    //                foreach(string value in output.answerMap.Values)
+    //                {
+    //                    print("Value: " + value);
+    //                    if(value.Equals(left))
+    //                    {
+    //                        leftCount++;
+    //                    }
+    //                    if(value.Equals(right))
+    //                    {
+    //                        rightCount++;
+    //                    }
+    //                }
+    //            }
+    //        }
 
-            yield return new WaitForSeconds(.3f);
-        }
-    }
+    //        yield return new WaitForSeconds(.3f);
+    //    }
+    //}
 
     class OptionPost
     {
@@ -208,7 +247,10 @@ public class PlayerInteractionMenu : MonoBehaviour
     }
     private void OnDisable()
     {
-        
+        leftCount = 0;
+        rightCount = 0;
+        leftCountUI.text = "";
+        rightCountUI.text = "";
     }
 
 }

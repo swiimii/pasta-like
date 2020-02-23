@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GameState : MonoBehaviour
 {
 
-    [SerializeField] GameObject playerInteractionUI;
+    [SerializeField] GameObject playerInteractionUI, pauseMenu;
     [SerializeField] List<string> players;
     [SerializeField] GameObject deathScreen;
     public string gameKey = "";
@@ -51,6 +51,7 @@ public class GameState : MonoBehaviour
     public void ReturnToMenu()
     {
         deathScreen.SetActive(false);
+        TogglePauseMenu(false);
         players.Clear();
         StartCoroutine("DeleteNetworkRoom");
         levelNum = 0;
@@ -60,11 +61,13 @@ public class GameState : MonoBehaviour
     public void PlayAgain()
     {
         deathScreen.SetActive(false);
+        TogglePauseMenu(false);
         levelNum = 0;
         SceneManager.LoadScene(2);
     }
     public void ShowDeathScreen()
     {
+        TogglePauseMenu(false);
         deathScreen.SetActive(true);
         deathScreenText.text = "You made it 'till level " + levelNum + "!";
     }
@@ -82,7 +85,7 @@ public class GameState : MonoBehaviour
 
     public void TogglePauseMenu(bool input)
     {
-        deathScreen.SetActive(input);
+        pauseMenu.SetActive(input);
 
     }
 
